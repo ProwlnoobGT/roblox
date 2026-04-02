@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PinkieCraft | Next-Gen Executor</title>
+    <style>
+        /* Inside your <style> tag */
+        .logo {
+            display: flex;
+            align-items: center; 
+            gap: 12px;           /* Space between image and text */
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;        /* Adjust size here */
+            width: auto;
+            border-radius: 6px;  /* Smooth corners */
+        }
+
+        /* This makes sure the text "PinkieCraft" stays pink next to the image */
+        .logo span {
+            color: #ff66a3; 
+        }
+        /* Base Styles */
+        :root {
+            --bg-color: #0b0b0e;
+            --surface-color: #15151a;
+            --primary-color: #ff66a3; /* Pink accent for PinkieCraft */
+            --primary-hover: #ff4d94;
+            --text-main: #ffffff;
+            --text-muted: #a0a0b0;
+            --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: rgba(11, 11, 14, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .nav-btn {
+            background-color: var(--primary-color);
+            color: #fff !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Hero Section */
+        header {
+            text-align: center;
+            padding: 12rem 5% 6rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: radial-gradient(circle at top, rgba(255, 102, 163, 0.15) 0%, var(--bg-color) 50%);
+        }
+
+        header h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #ffffff, var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(255, 102, 163, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--surface-color);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background-color: var(--surface-color);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 102, 163, 0.3);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Mobile Section */
+        .mobile-banner {
+            background: linear-gradient(45deg, var(--surface-color), #1a1a24);
+            margin: 4rem 5%;
+            padding: 4rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .mobile-banner h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .mobile-banner p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 5rem 5%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .faq-header h2 {
+            font-size: 2.5rem;
+        }
+
+        .faq-header p {
+            color: var(--text-muted);
+        }
+
+        .faq-item {
+            background-color: var(--surface-color);
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .faq-question:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            color: var(--text-muted);
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 200px; /* Arbitrary high value for animation */
+        }
+
+        .faq-item.active .faq-question {
+            color: var(--primary-color);
+        }
+
+        /* Footer CTA */
+        .footer-cta {
+            text-align: center;
+            padding: 6rem 5%;
+            background: linear-gradient(to top, var(--surface-color), var(--bg-color));
+        }
+
+        .footer-cta h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-cta p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* In a real app, you'd put a hamburger menu here */
+            }
+            header h1 {
+                font-size: 3rem;
+            }
+            .hero-buttons {
+                flex-direction: column;
+            }
+            .mobile-banner {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+        <img src="logo.png" alt="PinkieCraft Logo">
+        <span>PinkieCraft</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">PinkieCraft</a>
+            <a href="#android">Android (work in progress)</a>
+            <a href="https://discord.gg/pinkiecraft" target="_blank" rel="noopener noreferrer">Discord</a>
+            <a href="#">Support</a>
+           <a href="https://www.dropbox.com/scl/fi/04f1i0rmnzwt03gefj7v3/PinkieCraft-Executor-1.0.0-setup.exe?rlkey=0oyf170zhh0d953493fbhr737&st=kiquimvj&dl=1" 
+            class="btn" 
+            style="background-color: #ff66a3; color: white; padding: 0.5rem 1rem; font-size: 0.8rem;" 
+            download>
+   Download Now
+</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>PinkieCraft</h1>
+        <p>Clean and slick UI, support for both its own custom, keyless DLL as well as KRNL & Oxygen U.</p>
+        <div class="hero-buttons">
+            <a href="https://www.dropbox.com/scl/fi/04f1i0rmnzwt03gefj7v3/PinkieCraft-Executor-1.0.0-setup.exe?rlkey=0oyf170zhh0d953493fbhr737&st=kiquimvj&dl=1" class="btn btn-primary" download>
+                Download Now
+            </a>
+            <button class="btn btn-secondary" onclick="document.getElementById('faq').scrollIntoView({behavior: 'smooth'})">
+                FAQ
+            </button>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="feature-card">
+            <h3>Built-In Script List</h3>
+            <p>No more searching infinitely for scripts - Powered by ScriptBlox, PinkieCraft has a large catalog of scripts you can run directly from the UI.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Settings for every use-case</h3>
+            <p>Everything from smooth injection, to auto-execute, to an FPS unlocker and beyond - available in PinkieCraft's settings.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Powerful IDE</h3>
+            <p>PinkieCraft's Integrated Development Environment, using the Monaco editor, provides an Optimized Scripting Experience, allowing you to reach your true scripting potential.</p>
+        </div>
+        <div class="feature-card">
+            <h3>UNC Support</h3>
+            <p>PinkieCraft supports the Unified Naming Convention, allowing PinkieCraft to be compatible with 99.9% of modern scripts.</p>
+        </div>
+    </section>
+
+    <section class="mobile-banner">
+        <h2>Next-Gen Mobile Scripting</h2>
+        <p>PinkieCraft Android offers next-generation Scripting in your pocket. For Free.</p>
+        <button class="btn btn-primary">Discover PinkieCraft Android (work in progress)</button>
+    </section>
+
+    <section class="faq" id="faq">
+        <div class="faq-header">
+            <h2>FAQ</h2>
+            <p>People often have questions, we like to provide answers</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">What scripts does PinkieCraft support? <span>+</span></div>
+            <div class="faq-answer">As a Level 8 Executor, PinkieCraft supports all scripts. This means it'll run 99% of modern scripts without a problem.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Why does Virustotal and my antivirus say PinkieCraft is a virus? <span>+</span></div>
+            <div class="faq-answer">PinkieCraft is not a virus. The reason these flags get falsely set off and detected as malicious software is because of the DLLs in PinkieCraft which are used to inject into the game engine. This is a common phenomenon called “False Positives”.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">How does PinkieCraft earn money? <span>+</span></div>
+            <div class="faq-answer">PinkieCraft actually uses FileDM revenue & Pop-Ups to pay its developers to continue to improve the executor.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">I'm having an issue with PinkieCraft - Where can I get assistance? <span>+</span></div>
+            <div class="faq-answer">You can join PinkieCraft's Discord server to receive support from our community and staff team.</div>
+        </div>
+    </section>
+
+<section class="footer-cta">
+    <h2>Ready to start using PinkieCraft?</h2>
+    <p>(Did I mention there's no key system?)</p>
+    
+    <a href="https://www.dropbox.com/scl/fi/04f1i0rmnzwt03gefj7v3/PinkieCraft-Executor-1.0.0-setup.exe?rlkey=0oyf170zhh0d953493fbhr737&st=kiquimvj&dl=1" class="btn btn-primary" style="padding: 1rem 3rem; font-size: 1.2rem;" download>
+        Download for free
+    </a>
+</section>
+
+    <script>
+        // Simple FAQ Accordion Logic
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                // Close other open items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('span').textContent = '+';
+                    }
+                });
+
+                // Toggle current item
+                item.classList.toggle('active');
+                const span = item.querySelector('span');
+                if (item.classList.contains('active')) {
+                    span.textContent = '−';
+                } else {
+                    span.textContent = '+';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
